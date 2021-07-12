@@ -1,4 +1,5 @@
 package com.alome.mvp.Model
 
 
-data class Movies(var title:String, var poster_url:String, var description: String, var rating:String, var isLike:Boolean)
+data class Results(var results:ArrayList<Movies>)
+data class Movies(var original_title:String, var poster_path:String, var overview: String, var vote_average:String)

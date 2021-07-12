@@ -3,7 +3,6 @@ package com.alome.mvp.Adapters
 import android.content.Context
 import android.content.Intent
 import java.util.ArrayList
-import com.alome.mvp.Model.Movies
 import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
 import android.view.View
@@ -12,20 +11,26 @@ import com.alome.mvp.R
 import com.squareup.picasso.Picasso
 import android.widget.TextView
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.cardview.widget.CardView
 import com.alome.mvp.Activities.MovieDetails
 import com.alome.mvp.Misc.Constants
+import com.alome.mvp.Model.Movies
 
 class MovieAdapter(var context: Context, arrayList: ArrayList<Movies>) :
     RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
     var movies = ArrayList<Movies>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.movie_item, null)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.movie_item, parent, false)
         return ViewHolder(view)
     }
 
+    fun setupData(movies:ArrayList<Movies>){
+        this.movies =movies;
+        notifyDataSetChanged()
+    }
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val (title, poster_url , _, rating) = movies[position]
+        val (title, poster_url , desc, rating) = movies[position]
 
         if(title.length>21){
             holder.title.text = title.substring(0, 19)+"..."
@@ -37,7 +42,14 @@ class MovieAdapter(var context: Context, arrayList: ArrayList<Movies>) :
             .load(Constants.POSTER_BASE_URL + poster_url)
             .into(holder.poster)
         holder.movieCard.setOnClickListener{
-            context.startActivity(Intent(context, MovieDetails::class.java))
+            var intent = Intent(context, MovieDetails::class.java)
+            .apply {
+                putExtra("title", title)
+                putExtra("poster_url", poster_url)
+                putExtra("desc", desc)
+                putExtra("rating", rating)
+            }
+            context.startActivity(intent)
         }
     }
 
