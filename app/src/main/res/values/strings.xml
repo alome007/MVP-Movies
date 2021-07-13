@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">MVP Movies</string>
     <string name="black_widow_des">Dominic Toretto and his crew battle the most skilled assassin and high-performance driver they\'ve ever encountered: his forsaken brother.</string>
+    <string name="empty_result">API returned empty Result</string>
+    <string name="no_result">No Result</string>
+    <string name="no_item_returned">Search Returned no result</string>
 </resources>

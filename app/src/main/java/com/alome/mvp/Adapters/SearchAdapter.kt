@@ -1,6 +1,9 @@
 package com.alome.mvp.Adapters
 
+import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import java.util.ArrayList
 import androidx.recyclerview.widget.RecyclerView
@@ -13,15 +16,16 @@ import android.widget.TextView
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.alome.mvp.Activities.MovieDetails
 import com.alome.mvp.Misc.Constants
 import com.alome.mvp.Model.Movies
 
-class MovieAdapter(var context: Context, arrayList: ArrayList<Movies>) :
-    RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
+class SearchAdapter(var context: Context, arrayList: ArrayList<Movies>) :
+    RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
     var movies = ArrayList<Movies>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.movie_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.search_item, parent, false)
         return ViewHolder(view)
     }
 
@@ -30,7 +34,7 @@ class MovieAdapter(var context: Context, arrayList: ArrayList<Movies>) :
         notifyDataSetChanged()
     }
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val (_,title, poster_url , desc, rating) = movies[position]
+        val (movie_id, title, poster_url , desc, rating) = movies[position]
 
         if(title.length>21){
             holder.title.text = title.substring(0, 19)+"..."
@@ -41,16 +45,32 @@ class MovieAdapter(var context: Context, arrayList: ArrayList<Movies>) :
         Picasso.get()
             .load(Constants.POSTER_BASE_URL + poster_url)
             .into(holder.poster)
+
         holder.movieCard.setOnClickListener{
-            var intent = Intent(context, MovieDetails::class.java)
-            .apply {
-                putExtra("title", title)
-                putExtra("poster_url", poster_url)
-                putExtra("desc", desc)
-                putExtra("rating", rating)
-            }
-            context.startActivity(intent)
+            val sequence = arrayOf<CharSequence>("Show Details", "Don't show this again")
+            val dialog = AlertDialog.Builder(context)
+            dialog.setTitle("Options")
+            dialog.setItems(
+                sequence
+            ) { dialog, which ->
+                when (which) {
+                    0 -> {
+                        var intent = Intent(context, MovieDetails::class.java)
+                            .apply {
+                                putExtra("title", title)
+                                putExtra("poster_url", poster_url)
+                                putExtra("desc", desc)
+                                putExtra("rating", rating)
+                            }
+                        context.startActivity(intent)
+                    }
+                    1->{
+                        // Blacklist its Id locally
+                    }
+                }
+            }.show()
         }
+
     }
 
     override fun getItemCount(): Int {
@@ -61,7 +81,7 @@ class MovieAdapter(var context: Context, arrayList: ArrayList<Movies>) :
         var title: TextView
         var rating: TextView
         var poster: ImageView
-        var movieCard: CardView
+        var movieCard: ConstraintLayout
 
         init {
             title = view.findViewById(R.id.title)

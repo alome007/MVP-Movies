@@ -14,7 +14,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.IOException
 
-class MainActivityViewModel: ViewModel() {
+class SearchViewModel: ViewModel() {
     lateinit var resultLiveData: MutableLiveData<Results>
     init {
         resultLiveData = MutableLiveData()
@@ -24,17 +24,17 @@ class MainActivityViewModel: ViewModel() {
         return resultLiveData
     }
 
-    fun makeAPICall(){
+    fun makeAPICall(query:String){
         viewModelScope.launch(Dispatchers.IO) {
-           val retroInterface= RetrofitInstance.initInstance().create(RetroInterface::class.java)
+            val retroInterface= RetrofitInstance.initInstance().create(RetroInterface::class.java)
 
             try {
-                val resp = retroInterface.getPopularMovies(Constants.MOVIE_DB_BASE_API_KEY)
+                val resp = retroInterface.searchMovie(Constants.MOVIE_DB_BASE_API_KEY, query )
                 resultLiveData.postValue(resp)
             } catch (t: Throwable){
                 when (t) {
                     is IOException -> {
-                       Log.d("DataError", t.message.toString())
+                        Log.d("DataError", t.message.toString())
                     }
                     else -> {
                         Log.d("DataError", t.message.toString())

@@ -9,9 +9,14 @@
         <entry key="app/src/main/res/drawable/ic_search.xml" value="0.24739583333333334" />
         <entry key="app/src/main/res/drawable/movie_details_curve.xml" value="0.15625" />
         <entry key="app/src/main/res/drawable/play_button_bg.xml" value="0.21396396396396397" />
+        <entry key="app/src/main/res/drawable/search_bg.xml" value="0.17239583333333333" />
+        <entry key="app/src/main/res/layout/activity_favourite.xml" value="0.1260135135135135" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.18888888888888888" />
+        <entry key="app/src/main/res/layout/loader.xml" value="0.18518518518518517" />
         <entry key="app/src/main/res/layout/movie_details_activity.xml" value="0.1925925925925926" />
         <entry key="app/src/main/res/layout/movie_item.xml" value="0.1925925925925926" />
+        <entry key="app/src/main/res/layout/search_fragment.xml" value="0.11081081081081082" />
+        <entry key="app/src/main/res/layout/search_item.xml" value="0.11081081081081082" />
         <entry key="app/src/main/res/layout/splash_screen.xml" value="0.1925925925925926" />
       </map>
     </option>
