@@ -95,5 +95,9 @@ class MovieDetails : AppCompatActivity() {
         container = findViewById(R.id.container)
     }
 
-
+    override fun onBackPressed() {
+        super.onBackPressed()
+        startActivity(Intent(this, MainActivity::class.java))
+        finish()
+    }
 }

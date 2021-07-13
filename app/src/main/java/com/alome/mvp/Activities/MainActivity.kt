@@ -20,10 +20,17 @@ import com.alome.mvp.Misc.Utils.Companion.showNoInternet
 import com.alome.mvp.Model.Movies
 import com.alome.mvp.Model.Results
 import com.alome.mvp.Network.ConnectionLiveData
-import com.alome.mvp.R
 import com.alome.mvp.ViewModel.MainActivityViewModel
 import com.google.android.material.snackbar.Snackbar
 import java.util.ArrayList
+
+import androidx.core.content.ContextCompat
+
+import android.view.WindowManager
+
+import android.view.Window
+import com.alome.mvp.R
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -97,6 +104,12 @@ class MainActivity : AppCompatActivity() {
         container = findViewById(R.id.container)
         search = findViewById(R.id.search)
         favourite = findViewById(R.id.favourite)
+
+        //change statusbar color to white
+        val window: Window = this.window
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        window.statusBarColor = ContextCompat.getColor(this, R.color.white)
     }
 }
 
