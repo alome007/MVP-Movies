@@ -33,8 +33,8 @@ git https://github.com/alome007/MVP-Movies.git
 
 ## Screenshots
 
-<img src="https://github.com/alome007/MVP-Movies/blob/master/Screenshots/screenshot1.jpeg" width="auto" height="492">
-<img src="https://github.com/alome007/MVP-Movies/blob/master/Screenshots/screenshot2.jpeg" width="auto" height="492">
-<img src="https://github.com/alome007/MVP-Movies/blob/master/Screenshots/screenshot3.jpeg" width="auto" height="492">
-<img src="https://github.com/alome007/MVP-Movies/blob/master/Screenshots/screenshot4.jpeg" width="auto" height="492">
-<img src="https://github.com/alome007/MVP-Movies/blob/master/Screenshots/screenshot5.jpeg" width="auto" height="492">
+<img src="https://github.com/alome007/MVP-Movies/blob/master/app/Screenshots/screenshot1.jpeg" width="auto" height="492">
+<img src="https://github.com/alome007/MVP-Movies/blob/master/app/Screenshots/screenshot2.jpeg" width="auto" height="492">
+<img src="https://github.com/alome007/MVP-Movies/blob/master/app/Screenshots/screenshot3.jpeg" width="auto" height="492">
+<img src="https://github.com/alome007/MVP-Movies/blob/master/app/Screenshots/screenshot4.jpeg" width="auto" height="492">
+<img src="https://github.com/alome007/MVP-Movies/blob/master/app/Screenshots/screenshot5.jpeg" width="auto" height="492">
