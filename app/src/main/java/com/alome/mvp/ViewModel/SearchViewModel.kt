@@ -34,10 +34,11 @@ class SearchViewModel: ViewModel() {
             } catch (t: Throwable){
                 when (t) {
                     is IOException -> {
-                        Log.d("DataError", t.message.toString())
+                        resultLiveData.postValue(null)
                     }
                     else -> {
-                        Log.d("DataError", t.message.toString())
+                        resultLiveData.postValue(null)
+
                     }
                 }
             }

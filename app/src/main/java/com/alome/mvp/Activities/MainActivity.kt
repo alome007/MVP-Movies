@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.alome.mvp.Adapters.MovieAdapter
 import com.alome.mvp.Fragments.SearchFragment
 import com.alome.mvp.Misc.Loader
+import com.alome.mvp.Misc.Utils.Companion.showNoInternet
 import com.alome.mvp.Model.Movies
 import com.alome.mvp.Model.Results
 import com.alome.mvp.Network.ConnectionLiveData
@@ -31,8 +32,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var adapter:MovieAdapter
     var movies = ArrayList<Movies>()
     lateinit var container: ConstraintLayout
-    lateinit var progressBar: ProgressBar
-    lateinit var search: ImageView
+    private lateinit var search: ImageView
     lateinit var favourite: ImageView
     lateinit var connectionLiveData: ConnectionLiveData
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,24 +40,28 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         //Init Views
         initUI()
-        //check for Internet connectivity
+
+        //check for Internet connectivity and show dialog accordingly
+      val dialog=  showNoInternet(this, false)
         connectionLiveData = ConnectionLiveData(this)
         connectionLiveData.observe(this, {
-            if (it){
-                //there's internet
-                initViewModel()
-            }   else {
-                // there's no internet
-                Snackbar.make(container, getString(R.string.empty_result), Snackbar.LENGTH_LONG).show()
 
+            if (it){
+                dialog.dismiss()
+                initViewModel()
+            }else {
+                dialog.show()
             }
         })
+
+        //open Search Fragment
 
         search.setOnClickListener{
             val searchFragment = SearchFragment()
             searchFragment.show(supportFragmentManager, "search")
         }
 
+        //open favourite activity
         favourite.setOnClickListener {
             startActivity(Intent(this, FavouriteMovie::class.java))
         }
@@ -68,6 +72,8 @@ class MainActivity : AppCompatActivity() {
         loader.isCancelable = false
         loader.show(supportFragmentManager, "loading")
         val viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
+
+        //get Observer
         viewModel.getResultObserver().observe(this,  {
             loader.dismiss()
             if (it!=null){
@@ -79,6 +85,7 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+        //Call Remote API
         viewModel.makeAPICall()
     }
 

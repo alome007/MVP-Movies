@@ -40,6 +40,8 @@ class ConnectionLiveData(context: Context) : LiveData<Boolean>() {
             .addCapability(NET_CAPABILITY_INTERNET)
             .build()
         cm.registerNetworkCallback(networkRequest, networkCallback)
+        checkValidNetworks()
+
     }
 
     override fun onInactive() {

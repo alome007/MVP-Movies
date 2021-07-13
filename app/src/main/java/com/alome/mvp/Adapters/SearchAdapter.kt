@@ -1,10 +1,10 @@
 package com.alome.mvp.Adapters
 
 import android.app.AlertDialog
-import android.app.Dialog
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
+import android.content.SharedPreferences
+import android.preference.PreferenceManager
 import java.util.ArrayList
 import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
@@ -15,11 +15,16 @@ import com.squareup.picasso.Picasso
 import android.widget.TextView
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.alome.mvp.Activities.MovieDetails
 import com.alome.mvp.Misc.Constants
+import com.alome.mvp.Misc.Constants.Companion.BLACKLISTED_MOVIES
+import com.alome.mvp.Misc.Constants.Companion.MOVIE
 import com.alome.mvp.Model.Movies
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import java.lang.reflect.Type
+
 
 class SearchAdapter(var context: Context, arrayList: ArrayList<Movies>) :
     RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
@@ -66,6 +71,9 @@ class SearchAdapter(var context: Context, arrayList: ArrayList<Movies>) :
                     }
                     1->{
                         // Blacklist its Id locally
+                        blackListFromSearch(movies[position], MOVIE)
+                        movies.remove(movies[position])
+                        notifyDataSetChanged()
                     }
                 }
             }.show()
@@ -93,5 +101,19 @@ class SearchAdapter(var context: Context, arrayList: ArrayList<Movies>) :
 
     init {
         movies = arrayList
+    }
+
+
+
+    fun blackListFromSearch(list: Movies?, key: String?) {
+        val prefs: SharedPreferences =
+            context.getSharedPreferences(BLACKLISTED_MOVIES, Context.MODE_PRIVATE)
+
+        val editor: SharedPreferences.Editor = prefs.edit()
+        val gson = Gson()
+        val json: String = gson.toJson(list)
+        editor.putString(key, json)
+        editor.apply()
+        Toast.makeText(context, context.getString(R.string.black_listed_text), Toast.LENGTH_LONG).show()
     }
 }

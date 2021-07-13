@@ -21,15 +21,23 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import android.content.DialogInterface
 
 import android.app.Dialog
+import android.content.Context
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 import android.content.DialogInterface.OnShowListener
+import android.content.SharedPreferences
 import android.view.*
 import android.widget.*
 
 import androidx.annotation.Nullable
 import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.alome.mvp.Misc.Constants
+import com.alome.mvp.Misc.Constants.Companion.BLACKLISTED_MOVIES
+import com.alome.mvp.Misc.Constants.Companion.MOVIE
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import java.lang.reflect.Type
 
 
 class SearchFragment: BottomSheetDialogFragment() {
@@ -87,11 +95,18 @@ class SearchFragment: BottomSheetDialogFragment() {
             loader.dismiss()
             if (it!=null){
                 if(it.results.size==0){
+
                     Toast.makeText(context, getString(R.string.no_item_returned), Toast.LENGTH_LONG).show()
                     noResult.visibility = View.VISIBLE
                 }
+                val movie = checkBlackListed(MOVIE);
+                if (it.results.contains(movie)){
+                    //remove from list so it does not show up
+                    it.results.remove(movie)
+                }
                 noResult.visibility = View.GONE
                 adapter.setupData(it.results)
+
             }   else {
                 // Result is null
                 Snackbar.make(mainContainer, getString(R.string.empty_result), Snackbar.LENGTH_LONG).show()
@@ -123,5 +138,13 @@ class SearchFragment: BottomSheetDialogFragment() {
         bottomSheet.layoutParams = layoutParams
     }
 
+    @SuppressLint("UseRequireInsteadOfGet")
+    fun checkBlackListed(key: String?): Movies? {
+        val prefs = context!!.getSharedPreferences(BLACKLISTED_MOVIES, Context.MODE_PRIVATE)
+        val gson = Gson()
+        val json = prefs.getString(key, "")
+        val type: Type = object : TypeToken<Movies?>() {}.type
+        return gson.fromJson(json, type)
+    }
 
 }

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:fillViewport="true"
+    android:id="@+id/container"
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -51,7 +52,7 @@
             app:layout_constraintTop_toBottomOf="@+id/poster" />
 
         <View
-            android:id="@+id/view2"
+            android:id="@+id/add_fav"
             android:layout_width="85dp"
             android:layout_height="80dp"
             android:layout_marginTop="76dp"
@@ -70,11 +71,12 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:elevation="30dp"
+            android:id="@+id/fav_icon"
             android:src="@drawable/ic_baseline_thumb_up_24"
-            app:layout_constraintBottom_toBottomOf="@+id/view2"
-            app:layout_constraintEnd_toEndOf="@+id/view2"
-            app:layout_constraintStart_toStartOf="@+id/view2"
-            app:layout_constraintTop_toTopOf="@+id/view2" />
+            app:layout_constraintBottom_toBottomOf="@+id/add_fav"
+            app:layout_constraintEnd_toEndOf="@+id/add_fav"
+            app:layout_constraintStart_toStartOf="@+id/add_fav"
+            app:layout_constraintTop_toTopOf="@+id/add_fav" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline3"

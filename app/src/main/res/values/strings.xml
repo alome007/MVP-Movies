@@ -4,4 +4,8 @@
     <string name="empty_result">API returned empty Result</string>
     <string name="no_result">No Result</string>
     <string name="no_item_returned">Search Returned no result</string>
+    <string name="movie_removed">Movie Removed from Your Favourite List</string>
+    <string name="movie_added">Movie Added to Your Favourite List</string>
+    <string name="black_listed_text">We won\'t show you this again</string>
+    <string name="no_item">Your Favourite List is Empty</string>
 </resources>

@@ -16,16 +16,17 @@ import androidx.cardview.widget.CardView
 import com.alome.mvp.Activities.MovieDetails
 import com.alome.mvp.Misc.Constants
 import com.alome.mvp.Model.Movies
+import com.alome.mvp.Room.MovieEntity
 
-class MovieAdapter(var context: Context, arrayList: ArrayList<Movies>) :
-    RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
-    var movies = ArrayList<Movies>()
+class FavouriteAdapter(var context: Context, arrayList: ArrayList<MovieEntity>) :
+    RecyclerView.Adapter<FavouriteAdapter.ViewHolder>() {
+    var movies = ArrayList<MovieEntity>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.movie_item, parent, false)
         return ViewHolder(view)
     }
 
-    fun setupData(movies:ArrayList<Movies>){
+    fun setupData(movies:ArrayList<MovieEntity>){
         this.movies =movies;
         notifyDataSetChanged()
     }
@@ -43,13 +44,13 @@ class MovieAdapter(var context: Context, arrayList: ArrayList<Movies>) :
             .into(holder.poster)
         holder.movieCard.setOnClickListener{
             var intent = Intent(context, MovieDetails::class.java)
-            .apply {
-                putExtra("title", title)
-                putExtra("poster_url", poster_url)
-                putExtra("desc", desc)
-                putExtra("rating", rating)
-                putExtra("id", id.toString())
-            }
+                .apply {
+                    putExtra("title", title)
+                    putExtra("poster_url", poster_url)
+                    putExtra("desc", desc)
+                    putExtra("rating", rating)
+                    putExtra("id", id)
+                }
             context.startActivity(intent)
         }
     }

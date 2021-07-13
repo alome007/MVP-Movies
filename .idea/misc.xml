@@ -15,6 +15,7 @@
         <entry key="app/src/main/res/layout/loader.xml" value="0.18518518518518517" />
         <entry key="app/src/main/res/layout/movie_details_activity.xml" value="0.1925925925925926" />
         <entry key="app/src/main/res/layout/movie_item.xml" value="0.1925925925925926" />
+        <entry key="app/src/main/res/layout/no_internet.xml" value="0.15" />
         <entry key="app/src/main/res/layout/search_fragment.xml" value="0.11081081081081082" />
         <entry key="app/src/main/res/layout/search_item.xml" value="0.11081081081081082" />
         <entry key="app/src/main/res/layout/splash_screen.xml" value="0.1925925925925926" />
