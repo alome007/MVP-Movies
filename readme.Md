@@ -5,7 +5,7 @@ This App is built using Kotlin, following the MVVM pattern to demonstrate how to
 
 
 
-[![Build Status](https://api.travis-ci.com/alome007/MVP-Movies.svg?branch=master)](https://api.travis-ci.com/alome007/MVP-Movies.svg?branch=master)
+[![Build Status](https://travis-ci.com/alome007/MVP-Movies.svg?branch=main)](https://travis-ci.com/alome007/MVP-Movies.svg?branch=main)
 
 
 
