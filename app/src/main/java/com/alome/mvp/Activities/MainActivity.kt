@@ -105,7 +105,7 @@ class MainActivity : AppCompatActivity() {
         search = findViewById(R.id.search)
         favourite = findViewById(R.id.favourite)
 
-        //change statusbar color to white
+        //change status bar color to white
         val window: Window = this.window
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
